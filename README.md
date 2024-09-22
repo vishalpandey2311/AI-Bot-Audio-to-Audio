@@ -133,7 +133,7 @@ def main():
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+Feel free to use and develop this project as it is freely accessible to anyone.
 
 ---
 
