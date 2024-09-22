@@ -87,8 +87,8 @@ def main():
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/ai-bot.git
-   cd ai-bot
+   git clone https://github.com/vishalpandey2311/AI-Bot-Audio-to-Audio/myai.git
+   cd myai
    ```
 
 2. **Install the required Python libraries**:
@@ -105,7 +105,7 @@ def main():
 
 1. **Run the application**:
    ```bash
-   python bot.py
+   python myai.py
    ```
    > The console bot will start, and you can begin interacting with the AI.
 
