@@ -1,142 +1,85 @@
-# AI Bot Project
 
-This AI bot is a console-based application built in Python. It interacts with users, sends user input to the **Gemini API**, and returns the AI's response back to the user. The bot is designed to engage in meaningful conversations and is hosted on **PythonAnywhere** for live use. The project uses a simple architecture with a focus on easy deployment and use.
+# Voice-Enabled AI Assistant
 
----
+This project is a **Voice-Enabled AI Assistant** powered by the **Gemini API** for natural language understanding, **Google Speech Recognition** for converting speech to text, and **Pyttsx3** for text-to-speech synthesis. The application features a GUI built using **PyQt5**, making it interactive and user-friendly. The assistant can record your voice, convert it into text, send it to the AI for processing, and provide spoken responses, offering a natural, conversational experience.
 
 ## Features
 
-- **Gemini API Integration**: The AI bot leverages the power of the Gemini API to generate responses based on user input.
-- **Console-Based Interface**: Users can interact with the AI directly from the console.
-- **Live Hosting**: The bot is hosted on PythonAnywhere, but can also be run locally.
-- **Simple Workflow**: Easy to understand and extend for further customization.
+- **Voice Recognition**: Converts speech to text using Google Speech Recognition.
+- **Natural Language Processing**: Interacts with the Gemini API to process user queries and provide AI responses.
+- **Text-to-Speech**: Uses Pyttsx3 to speak out the AI's response.
+- **GUI**: A graphical user interface built with PyQt5, offering a seamless user experience.
+- **Error Handling**: Provides clear feedback for any errors during speech recognition or AI processing.
+- **Non-blocking UI**: Audio recording and AI response processing occur in separate threads, ensuring the interface remains responsive.
+- **Customizable Interface**: Includes a pulsating "Start Recording" button to visually indicate when the recording is active.
 
----
-
-## Functions and Workflow
-
-### 1. `get_user_input()`
-This function collects user input from the console.
-```python
-def get_user_input():
-    user_input = input("You: ")
-    return user_input
-```
-- **Purpose**: To gather input from the user.
-- **Workflow**: The user enters a message, which is stored and returned to be sent to the Gemini API.
-
-### 2. `send_to_gemini_api(user_input)`
-This function sends the user's input to the Gemini API and retrieves a response.
-```python
-def send_to_gemini_api(user_input):
-    # Use HTTP requests to communicate with Gemini API
-    response = send_request_to_gemini(user_input)
-    return response
-```
-- **Purpose**: To send the user's input to the AI and get the AI's response.
-- **Workflow**: The function makes an HTTP request to the Gemini API, passing in the user's message and awaiting the response.
-
-### 3. `process_response(response)`
-This function processes the response received from the Gemini API.
-```python
-def process_response(response):
-    return response['data']['message']
-```
-- **Purpose**: To extract the actual message from the API response.
-- **Workflow**: It processes the JSON object returned by the API, extracting and returning the relevant message.
-
-### 4. `display_bot_response(bot_response)`
-This function outputs the AI's response in the console.
-```python
-def display_bot_response(bot_response):
-    print(f"Bot: {bot_response}")
-```
-- **Purpose**: To display the response from the Gemini API in the console.
-- **Workflow**: The processed message is displayed to the user in the console format.
-
-### 5. `main()`
-This is the main function that ties all the components together.
-```python
-def main():
-    print("Welcome to the AI Console Bot!")
-    while True:
-        user_input = get_user_input()
-        if user_input.lower() == 'exit':
-            print("Goodbye!")
-            break
-        response = send_to_gemini_api(user_input)
-        bot_response = process_response(response)
-        display_bot_response(bot_response)
-```
-- **Purpose**: To control the overall flow of the application.
-- **Workflow**:
-  1. The bot welcomes the user.
-  2. It runs in a continuous loop, asking for input, sending it to the Gemini API, processing the response, and displaying the result.
-  3. The loop exits when the user types 'exit'.
-
----
-
-## Getting Started
+## Installation
 
 ### Prerequisites
-- Python 3.x installed on your system.
-- Internet connection (for interacting with the Gemini API).
-- A PythonAnywhere account (if you wish to host the bot).
 
-### Installation
+1. **Python 3.x** installed on your machine. You can download it from [here](https://www.python.org/downloads/).
+2. **Gemini API Key**: You need to sign up for an API key from [Google's Gemini API platform](https://developers.google.com/) and replace the placeholder key (`API_KEY = 'Your_Gemini_API_Key'`) in the code with your actual API key.
+3. **PyQt5**: Used for creating the GUI interface.
+4. **SpeechRecognition** and **Pyttsx3**: For voice-to-text and text-to-speech functionality.
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/vishalpandey2311/AI-Bot-Audio-to-Audio/myai.git
-   cd myai
-   ```
+### Libraries
 
-2. **Install the required Python libraries**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   > Ensure you have the necessary dependencies such as `requests` to handle the API requests.
+To install the required Python libraries, run the following command in your terminal:
 
-3. **Configure API**:
-   - Replace the `API_KEY` in the code with your Gemini API key.
-   - Update any necessary API endpoint URLs as per your Gemini account.
+```bash
+pip install PyQt5 SpeechRecognition pyttsx3 google-generativeai sounddevice scipy
+```
 
-### Running Locally
+### Clone the Repository
 
-1. **Run the application**:
-   ```bash
-   python myai.py
-   ```
-   > The console bot will start, and you can begin interacting with the AI.
+```bash
+git clone https://github.com/yourusername/voice-enabled-ai-assistant.git
+cd voice-enabled-ai-assistant
+```
 
-2. **Exit**:
-   - Type `exit` to end the conversation and stop the program.
+### Running the Application
 
-### Hosting on PythonAnywhere
+Once all the libraries are installed, run the following command to launch the application:
 
-1. **Create an account**: Sign up at [PythonAnywhere](https://www.pythonanywhere.com/).
-2. **Upload your project**:
-   - You can either upload the repository directly or clone it using `git clone` in the PythonAnywhere bash console.
-3. **Setup**:
-   - Install the required dependencies in the virtual environment provided by PythonAnywhere.
-4. **Run your AI**: Once everything is set up, the bot will run live on PythonAnywhere.
+```bash
+python main.py
+```
 
----
+### Main Functionalities
 
-## Future Enhancements
+#### 1. Recording Audio
+The app starts recording audio when you press the "Start Recording" button. It uses the `AudioRecorder` class to record the audio for a specified duration (default: 5 seconds).
 
-- **GUI Support**: Add a graphical user interface for enhanced user interaction.
-- **Improved AI**: Implement more advanced NLP features and alternative AI models.
-- **Customization**: Enable customizable responses and workflow behavior.
+#### 2. Speech-to-Text Conversion
+The recorded audio is converted to text using Google’s SpeechRecognition library. The function `speech_to_text()` handles the conversion.
 
----
+#### 3. AI Processing
+The recognized text is sent to the **Gemini AI model**, which processes the message and returns a response. The function `AIProcessor.run()` is responsible for sending and receiving AI responses.
+
+#### 4. Text-to-Speech
+Once the AI returns the response, the `text_to_speech()` function converts the AI's text response back to speech and speaks it out loud.
+
+#### 5. UI Interaction
+The GUI is built using PyQt5, with clear status messages and a pulsating button indicating when the app is recording or processing.
+
+## Code Structure
+
+- `main.py`: This is the main file where the entire application logic resides.
+  - **`AudioRecorder`**: A thread-safe class responsible for recording audio using `sounddevice`.
+  - **`AIProcessor`**: A thread-safe class for sending text to the Gemini AI and handling responses.
+  - **`PulsatingButton`**: Custom PyQt5 button with a pulsating effect to indicate active recording.
+  - **`MainWindow`**: Main window of the application with GUI components like the conversation area, buttons, and status label.
+
+## Future Improvements
+
+- **Voice Command Customization**: Allow users to define custom commands for specific tasks.
+- **Multiple Language Support**: Expand the app to recognize and respond in multiple languages.
+- **Voice Feedback Improvements**: Add tone adjustments to text-to-speech responses for a more natural conversation flow.
+
+## Contributing
+
+Feel free to contribute to this project by submitting a pull request or opening an issue on GitHub.
 
 ## License
 
-Feel free to use and develop this project as it is freely accessible to anyone.
-
----
-
-## Contributors
-
-- **Vishal Pandey** - Initial work and development.
+This project is licensed under the MIT License.
